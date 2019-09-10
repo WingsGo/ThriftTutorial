@@ -1,34 +1,32 @@
-cmake_minimum_required(VERSION 3.0.2)
+# 参考Thrift官方tutorial,注释include(BoostMacros)并将LINK_AGAINST_THRIFT_LIBRARY替换为target_link_libraries
+
+cmake_minimum_required(VERSION 3.12)
 project(ThriftTutorial)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+set(CMAKE_CXX_STANDARD 11)
 
-add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+# 指定thrift执行路径
+set(Thrift_EXCUTABLE /usr/local/bin/thrift)
 
-find_package(Thrift REQUIRED)
-find_package(Boost REQUIRED)
+#Make sure gen-cpp files can be included
+include_directories("${PROJECT_SOURCE_DIR}/gen-cpp")
 
-message("Thrift_EXECUTABLE: " ${Thrift_EXECUTABLE})
-message("Thrift_LIBRARIES: " ${Thrift_LIBRARIES})
 
 set(THRIFT_GEN_FILES
-        ${CMAKE_SOURCE_DIR}/gen-cpp/Serv.h
-        ${CMAKE_SOURCE_DIR}/gen-cpp/Serv.cpp
-        ${CMAKE_SOURCE_DIR}/gen-cpp/student_types.h
-        ${CMAKE_SOURCE_DIR}/gen-cpp/student_types.cpp
-        ${CMAKE_SOURCE_DIR}/gen-cpp/student_constants.h
-        ${CMAKE_SOURCE_DIR}/gen-cpp/student_constants.cpp)
+        gen-cpp/Serv.cpp
+        gen-cpp/student_types.cpp
+        gen-cpp/student_constants.cpp)
 
-message(${THRIFT_GEN_FILES})
+# 将动态生成代码与thrift进行链接
+add_library(thriftgenfiles SHARED ${THRIFT_GEN_FILES})
+target_link_libraries(thriftgenfiles thrift)
 
 add_custom_command(
         DEPENDS ${CMAKE_SOURCE_DIR}/student.thrift
         OUTPUT ${THRIFT_GEN_FILES}
         COMMAND ${Thrift_EXECUTABLE}
-        ARGS -r -gen cpp -o ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/student.thrift)
+        ARGS -r -gen cpp ${CMAKE_SOURCE_DIR}/student.thrift)
 
-add_library(tutorialgencpp STATIC ${THRIFT_GEN_FILES})
-
-add_executable(client main.cpp ${THRIFT_GEN_FILES})
-target_link_libraries(client ${Thrift_LIBRARIES} thrift)
+add_executable(client main.cpp)
+target_link_libraries(client thriftgenfiles)
+target_link_libraries(client thrift)
