@@ -28,6 +28,10 @@ add_custom_command(
         COMMAND ${THRIFT_EXCUTABLE}
         ARGS --gen cpp -r ${PROJECT_SOURCE_DIR}/student.thrift)
 
-add_executable(client main.cpp)
+add_executable(client client.cpp)
 target_link_libraries(client thriftgenfiles)
 target_link_libraries(client thrift)
+
+add_executable(server server.cpp)
+target_link_libraries(server thriftgenfiles)
+target_link_libraries(server thrift)
