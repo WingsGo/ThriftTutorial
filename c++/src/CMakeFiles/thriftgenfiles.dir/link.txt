@@ -1,0 +1,2 @@
+/usr/bin/ar qc libthriftgenfiles.a  CMakeFiles/thriftgenfiles.dir/gen-cpp/Calculator.cpp.o CMakeFiles/thriftgenfiles.dir/gen-cpp/shared_constants.cpp.o CMakeFiles/thriftgenfiles.dir/gen-cpp/shared_types.cpp.o CMakeFiles/thriftgenfiles.dir/gen-cpp/SharedService.cpp.o CMakeFiles/thriftgenfiles.dir/gen-cpp/tutorial_constants.cpp.o CMakeFiles/thriftgenfiles.dir/gen-cpp/tutorial_types.cpp.o
+/usr/bin/ranlib libthriftgenfiles.a

@@ -1,6 +1,6 @@
 # 参考Thrift官方tutorial,注释include(BoostMacros)并将LINK_AGAINST_THRIFT_LIBRARY替换为target_link_libraries
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.10)
 project(ThriftTutorial)
 
 set(CMAKE_CXX_STANDARD 11)
