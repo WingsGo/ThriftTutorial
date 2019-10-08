@@ -1,5 +1,0 @@
-/home/mi/SourceCode/ThriftTutorial/src/CMakeFiles/edit_cache.dir
-/home/mi/SourceCode/ThriftTutorial/src/CMakeFiles/rebuild_cache.dir
-/home/mi/SourceCode/ThriftTutorial/src/CMakeFiles/server.dir
-/home/mi/SourceCode/ThriftTutorial/src/CMakeFiles/thriftgenfiles.dir
-/home/mi/SourceCode/ThriftTutorial/src/CMakeFiles/client.dir

@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-4a9eb56fa554d5d416a35d65afc425ef gen-cpp/Calculator.cpp
